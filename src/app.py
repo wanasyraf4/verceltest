@@ -73,6 +73,8 @@
 
 # ################### back end #################
 # app = dash.Dash(__name__)
+#Initiate the app 
+server = app.server
 
 # def update_graph_1(n_intervals):
 #     data = {
