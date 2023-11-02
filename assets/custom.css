@@ -1,3 +1,11 @@
 .navbar {
     background-color: #00214f !important;
 }
+body {
+    background-color: #111111;
+    color: white;
+}
+
+.Select-control, .Select-multi-value-wrapper, .Select-clear-zone, .Select-arrow-zone {
+    background-color: black;
+}
