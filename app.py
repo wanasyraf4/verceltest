@@ -129,7 +129,7 @@ fig.update_layout(
 # Calculate the time remaining
 date_next_failure = datetime.strptime('27/02/2024', '%d/%m/%Y')
 #time_remaining_days = (date_next_failure - datetime.now()).days
-time_remaining_days = (date_next_failure - current_date).days
+time_remaining_days = (date_next_failure - date_current).days
 
 # Create the donut chart
 fig_donut = go.Figure(data=[go.Pie(labels=df['Prediction'], values=df['RUL'].str.rstrip('%').astype(int), hole=.3)])
@@ -156,9 +156,13 @@ table = html.Table(
 
 def generate_data(n_intervals, graph_id):
     #now = datetime.now()
+    my_timezone = pytz.timezone('Asia/Singapore')
     now = datetime.now(my_timezone)
-    times = [(now - timedelta(seconds=i)).strftime('%Y-%m-%d %H:%M:%S') for i in reversed(range(n_intervals))]
     
+    # times = [(now - timedelta(seconds=i)).strftime('%Y-%m-%d %H:%M:%S') for i in reversed(range(n_intervals))]
+    # Generate a list of time strings in one-second intervals
+    times = [(now - timedelta(seconds=i)).strftime('%Y-%m-%d %H:%M:%S') for i in reversed(range(n_intervals))]
+
     if graph_id == 1:  # Temperature graph
         values = [random.uniform(280, 299) for _ in range(n_intervals)]
     elif graph_id == 2:  # Torque graph
