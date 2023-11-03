@@ -23,7 +23,7 @@ app = dash.Dash(__name__, external_stylesheets=[
 server = app.server
 
 data = {
-    'Predicted Failure Date': ['27/2/2024', '3/3/2024', '17/3/2024', '29/4/2024', '13/5/2024', '23/6/2024', '9/9/2024', '11/9/2024'],
+    'Predicted Failure Date': ['27/02/2024', '03/03/2024', '17/03/2024', '29/04/2024', '13/05/2024', '23/06/2024', '09/09/2024', '11/09/2024'],
     'Prediction': ['Failure 1 - turbulent flow rate', 'Failure 2 - bearing wear', 'Failure 3 - resin leakage', 'Failure 1 - turbulent flow rate', 'Failure 4 - abnormal temp', 'Failure 1 - turbulent flow rate', 'Failure 2 - bearing wear', 'Failure 5 - unknown'],
     'RUL': ['61%', '57%', '51%', '45%', '39%', '21%', '13%', '1%']
 }
@@ -64,7 +64,7 @@ deg_now_percentage = f'{deg_now_decimal * 100:.2f}%'
 
 # Replace 'degNow' in your data
 dataRUL = {
-    'Date': ['01/03/2023', '02/11/2023', current_date, '27/2/2024', '3/3/2024', '17/3/2024', '29/4/2024', '13/5/2024', '23/6/2024', '9/9/2024', '11/9/2024'],
+    'Date': ['01/03/2023', '02/11/2023', current_date, '27/02/2024', '03/03/2024', '17/03/2024', '29/04/2024', '13/05/2024', '23/06/2024', '09/09/2024', '11/09/2024'],
     'RUL': ['95%', '77%', deg_now_percentage, '61%', '57%', '51%', '45%', '39%', '21%', '13%', '1%']
 }
 
