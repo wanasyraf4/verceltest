@@ -400,7 +400,7 @@ app.layout = html.Div([
                 }
             ),
             html.P(
-                "Some Root-Cause Analysis text or information goes here.",
+                "Future Failure Class Prediction.",
                 style={
                     'textAlign': 'center',
                     'color': 'white',
@@ -438,7 +438,7 @@ app.layout = html.Div([
             }
         ),
         html.P(
-            "Some machine lifetime text or information goes here.",
+            "Remaining Useful Life projection from predicted failure cases.",
             style={
                 'textAlign': 'center',
                 'color': 'white',
