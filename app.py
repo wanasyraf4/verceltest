@@ -128,8 +128,8 @@ fig.update_layout(
 
 # Calculate the time remaining
 date_next_failure = datetime.strptime('27/02/2024', '%d/%m/%Y')
-time_remaining_days = (date_next_failure - datetime.now()).days
-
+#time_remaining_days = (date_next_failure - datetime.now()).days
+time_remaining_days = (date_next_failure - current_date).days
 
 # Create the donut chart
 fig_donut = go.Figure(data=[go.Pie(labels=df['Prediction'], values=df['RUL'].str.rstrip('%').astype(int), hole=.3)])
@@ -155,7 +155,8 @@ table = html.Table(
 )
 
 def generate_data(n_intervals, graph_id):
-    now = datetime.now()
+    #now = datetime.now()
+    now = datetime.now(my_timezone)
     times = [(now - timedelta(seconds=i)).strftime('%Y-%m-%d %H:%M:%S') for i in reversed(range(n_intervals))]
     
     if graph_id == 1:  # Temperature graph
