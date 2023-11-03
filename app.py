@@ -283,7 +283,7 @@ app.layout = html.Div([
                 [
                     html.Img(src='/assets/dashboardscada3.gif', height='300px', width='450px')
                 ],
-                style={'width': '35%', 'display': 'inline-block', 'backgroundColor': '#111111', 'margin-top': '160px'}
+                style={'width': '33%', 'display': 'inline-block', 'backgroundColor': '#111111', 'margin-top': '160px'}
             ),
             html.Div(  # Container for right graph (Rotation)
                 [
