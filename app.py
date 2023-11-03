@@ -6,6 +6,7 @@ from dash import dcc, html
 # import dash_html_components as html
 import plotly.graph_objs as go
 import random
+import pytz
 import pandas as pd
 from datetime import datetime, timedelta
 import numpy as np  # Importing the numpy library
@@ -33,7 +34,13 @@ df = pd.DataFrame(data)
 # Convert the initial RUL value to a decimal
 initial_rul = 0.77  # corresponding to 77%
 # current_date = datetime.datetime.now().strftime('%d/%m/%Y')
-current_date = datetime.now().strftime('%d/%m/%Y')
+# current_date = datetime.now().strftime('%d/%m/%Y')
+
+# Define your time zone
+my_timezone = pytz.timezone('Asia/Singapore')  # Replace 'Asia/Singapore' with your actual time zone
+
+# Get the current date and time in your time zone
+current_date = datetime.now(my_timezone).strftime('%d/%m/%Y')
 
 # Parse the dates to datetime objects
 date_previous = datetime.strptime('02/11/2023', '%d/%m/%Y')
