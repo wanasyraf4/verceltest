@@ -246,7 +246,7 @@ app.layout = html.Div([
                 }
             ),
             html.P(
-                "The sensor data was generated using Synthetic Data Generation (SDG) via a quantised FP-16 (float16, half-precision unit) Variational Autoencoder (VAE) Transformer model, codenamed M3, trained on a time-series database from injection moulding processes.",
+                "Real Time Sensor data streaming via Synthetic Data Generation.",
                 style={
                     'textAlign': 'center',
                     'color': 'white',
