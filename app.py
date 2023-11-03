@@ -25,8 +25,10 @@ def generate_data(n_intervals, graph_id):
         values = [random.uniform(280, 299) for _ in range(n_intervals)]
     elif graph_id == 2:  # Torque graph
         values = [random.uniform(30, 50) for _ in range(n_intervals)]
-    else:  # Rotation graph
+    elif graph_id == 3:  # Rotation graph
         values = [random.uniform(1300, 1500) for _ in range(n_intervals)]
+    else:  # Speed graph
+        values = [random.uniform(50, 70) for _ in range(n_intervals)]
     
     return times, values
 
@@ -38,9 +40,11 @@ def update_graph(times, values, graph_id):
         x=times,
         y=values,
         mode='lines+markers',
-        line=dict(color='cyan' if graph_id == 1 else 'magenta' if graph_id == 2 else 'orange')
+        # line=dict(color='cyan' if graph_id == 1 else 'magenta' if graph_id == 2 else 'orange')
+        line=dict(color='cyan')
     )
     layout = go.Layout(
+        height=300,
         xaxis=dict(
             title='Time',
             gridcolor='grey',
@@ -60,7 +64,7 @@ def update_graph(times, values, graph_id):
                 color='cyan'
             )
         ),
-        title='Temperature' if graph_id == 1 else 'Torque' if graph_id == 2 else 'Rotation',
+        title='Temperature' if graph_id == 1 else 'Torque' if graph_id == 2 else 'Rotation' if graph_id == 3 else 'Speed',
         titlefont=dict(
             color='cyan'
         ),
@@ -75,7 +79,7 @@ app.layout = html.Div([
     html.Div(  # Adding a bar on top
         [
             html.H1(
-                "Predective Maintenance Technology Demonstrator System",
+                "Predictive Maintenance Technology Demonstrator Dashboard",
                 style={
                     'textAlign': 'center',
                     'color': 'cyan',
@@ -88,23 +92,46 @@ app.layout = html.Div([
         }
     ),
     
-    html.Div(  # Container for the graphs
+     html.Div(  # Container for the graphs and gif
         [
-            html.Div(  # Left graph
+            html.Div(  # Container for left graphs
                 [
-                    dcc.Graph(id='live-update-graph-3'),
+                    html.Div(  # hopper
+                        [
+                            dcc.Graph(id='live-update-graph-4'),
+                        ],
+                        style={'width': '100%', 'display': 'inline-block', 'backgroundColor': '#111111'}
+                    ),
+                    html.Div(  # rotation graph
+                        [
+                            dcc.Graph(id='live-update-graph-3'),
+                        ],
+                        style={'width': '100%', 'display': 'inline-block', 'backgroundColor': '#111111'}
+                    )
                 ],
                 style={'width': '33%', 'display': 'inline-block', 'backgroundColor': '#111111'}
             ),
-            html.Div(  # middle graph
+            html.Div(  # Container for gif
                 [
-                    dcc.Graph(id='live-update-graph-1'),
+                    html.Img(src='/assets/dashboardscada3.gif', height='300px', width='450px')
                 ],
-                style={'width': '33%', 'display': 'inline-block', 'backgroundColor': '#111111'}
+                style={'width': '35%', 'display': 'inline-block', 'backgroundColor': '#111111', 'margin-top': '160px'}
             ),
-            html.Div(  # left graph
+            html.Div(  # Container for right graph (Rotation)
                 [
-                    dcc.Graph(id='live-update-graph-2'),
+                    html.Div(  # Temperature graph
+                        [
+                            dcc.Graph(id='live-update-graph-1'),
+                        ],
+                        style={'width': '100%', 'display': 'inline-block', 'backgroundColor': '#111111'}
+                    ),
+                    html.Div(  # Temperature graph
+                        [
+                            dcc.Graph(id='live-update-graph-2'),
+                        ],
+                        style={'width': '100%', 'display': 'inline-block', 'backgroundColor': '#111111'}
+                    )
+                    # dcc.Graph(id='live-update-graph-3'),
                 ],
                 style={'width': '33%', 'display': 'inline-block', 'backgroundColor': '#111111'}
             )
@@ -122,7 +149,8 @@ app.layout = html.Div([
 @app.callback(
     [dash.dependencies.Output('live-update-graph-1', 'figure'),
      dash.dependencies.Output('live-update-graph-2', 'figure'),
-     dash.dependencies.Output('live-update-graph-3', 'figure')],  # Adding output for third graph
+     dash.dependencies.Output('live-update-graph-3', 'figure'),
+     dash.dependencies.Output('live-update-graph-4', 'figure')],  # Adding output for fourth graph
     [dash.dependencies.Input('interval-component', 'n_intervals')]
 )
 
@@ -137,10 +165,13 @@ def update_output(n_intervals):
     times_1, values_1 = generate_data(n_intervals, graph_id=1)  # Temperature
     times_2, values_2 = generate_data(n_intervals, graph_id=2)  # Torque
     times_3, values_3 = generate_data(n_intervals, graph_id=3)  # Rotation
+    times_4, values_4 = generate_data(n_intervals, graph_id=4)  # Speed
+    
     figure_1 = update_graph(times_1, values_1, graph_id=1)
     figure_2 = update_graph(times_2, values_2, graph_id=2)
     figure_3 = update_graph(times_3, values_3, graph_id=3)
-    return figure_1, figure_2, figure_3
+    figure_4 = update_graph(times_4, values_4, graph_id=4)
+    return figure_1, figure_2, figure_3, figure_4
 
 
 ################## front end ##################
