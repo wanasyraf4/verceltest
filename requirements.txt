@@ -4,6 +4,7 @@ dash==2.14.1
 pandas==2.1.2
 numpy==1.26.1
 Werkzeug==2.0.2
+pytz
 
 # Required for deployment on Heroku
 gunicorn==20.1.0
